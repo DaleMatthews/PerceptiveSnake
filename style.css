@@ -1,0 +1,44 @@
+﻿body
+{
+	background-color: #FACC2E;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+/* canvas
+{
+	position:absolute;
+	visibility: hidden;
+} */
+
+#heading
+{
+	background-color: #6E6E6E;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 200%;
+	border: 3px solid;
+	border-radius: 25px;
+	border-color: #000000;
+}
+
+#game
+{
+	background-color: #6E6E6E;
+	color: #FFFFFF;
+	text-align: center;
+	height: auto;
+	margin-left: 5%;
+	margin-right: 5%;
+	border: 3px solid;
+	border-radius: 25px;
+	border-color: #000000;
+}
+footer
+{
+	position: absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	font-size: 90%;
+}
