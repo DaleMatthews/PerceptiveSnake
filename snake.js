@@ -15,14 +15,12 @@ $(document).ready(function(){
 	var food;
 	var score;
 	var start=true;
+	var gameOn=true;
 	
-	var snake_image;
 	var food_image;
 	
  	var snakeArray = new Array(); 
 	
-	//var burp = new Audio('burp.mp3');
-	//var death = new Audio('torture.mp3');
 	var burp = new Howl({
 	    urls: ['sounds/burp.mp3', 'sounds/burp.ogg']
 	});
