@@ -10,7 +10,7 @@ $(document).ready(function(){
 	
 	var ctx; //back buffer
 	
-	var cell_size = 30;
+	var cell_size = 25;
 	var dir;
 	var food;
 	var score;
