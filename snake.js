@@ -19,10 +19,9 @@ $(document).ready(function(){
 	var highScore=0;
 	var highScoreText;
 	
-
-	var food_image;
-	
  	var snakeImages = new Array(); 
+	var foodImages = new Array();
+	var foodIndex=0;
 	
 	var burp = new Howl({
 	    urls: ['sounds/burp.mp3', 'sounds/burp.ogg']
@@ -32,7 +31,7 @@ $(document).ready(function(){
 	});
 	var mainSong = new Howl({
 	    urls: ['sounds/mainSong.mp3', 'sounds/mainSong.ogg']
-	}).play();
+	});//.play();
 
 	var snake_array; //an array of cells to make up the snake
 	
@@ -58,44 +57,74 @@ $(document).ready(function(){
 
 	function loadImages()
 	{
-		food_image = new Image();
-		food_image.src = 'cupcake.jpg';
-
 		snakeImages[0] = new Image();
-		snakeImages[0].src = 'image/snake.jpg';
+		snakeImages[0].src = 'images/snake.png';
 
 		snakeImages[1] = new Image();
-		snakeImages[1].src = 'image/snake2.jpg';
+		snakeImages[1].src = 'images/snake2.png';
 
 		snakeImages[2] = new Image();
-		snakeImages[2].src = 'image/snake3.jpg';
+		snakeImages[2].src = 'images/snake3.png';
 
 		snakeImages[3] = new Image();
-		snakeImages[3].src = 'image/snake4.jpg';
+		snakeImages[3].src = 'images/snake4.png';
 
 		snakeImages[4] = new Image();
-		snakeImages[4].src = 'image/snake5.jpg';
+		snakeImages[4].src = 'images/snake5.png';
 
 		snakeImages[5] = new Image();
-		snakeImages[5].src = 'image/snake6.jpg';
+		snakeImages[5].src = 'images/snake6.png';
 		
 		snakeImages[6] = new Image();
-		snakeImages[6].src = 'image/snake7.jpg';
+		snakeImages[6].src = 'images/snake7.png';
 
 		snakeImages[7] = new Image();
-		snakeImages[7].src = 'image/snake8.jpg';
+		snakeImages[7].src = 'images/snake8.png';
 
 		snakeImages[8] = new Image();
-		snakeImages[8].src = 'image/snake9.jpg';
+		snakeImages[8].src = 'images/snake9.png';
 
 		snakeImages[9] = new Image();
-		snakeImages[9].src = 'image/snake10.jpg';
+		snakeImages[9].src = 'images/snake10.png';
 
 		snakeImages[10] = new Image();
-		snakeImages[10].src = 'image/snake11.jpg';
+		snakeImages[10].src = 'images/snake11.png';
 
 		snakeImages[11] = new Image();
-		snakeImages[11].src = 'image/snake12.jpg';
+		snakeImages[11].src = 'images/snake12.png';
+
+		snakeImages[12] = new Image();
+		snakeImages[12].src = 'images/snake13.png';
+
+		snakeImages[13] = new Image();
+		snakeImages[13].src = 'images/snake14.png';
+
+		snakeImages[14] = new Image();
+		snakeImages[14].src = 'images/snake15.png';
+
+		snakeImages[15] = new Image();
+		snakeImages[15].src = 'images/snake16.png';
+
+		snakeImages[16] = new Image();
+		snakeImages[16].src = 'images/snake17.png';
+		
+		foodImages[0] = new Image();
+		foodImages[0].src = 'images/pacsgear.png';
+
+		foodImages[1] = new Image();
+		foodImages[1].src = 'images/acuo_technologies.png';
+
+		foodImages[2] = new Image();
+		foodImages[2].src = 'images/ISYS_Master_Logo.png';
+
+		foodImages[3] = new Image();
+		foodImages[3].src = 'images/twistage.jpg';
+
+		foodImages[4] = new Image();
+		foodImages[4].src = 'images/Logo_Nolij.gif';
+
+		foodImages[5] = new Image();
+		foodImages[5].src = 'images/saperionag.png';
 	}
 	
 	function create_snake()
@@ -177,6 +206,9 @@ $(document).ready(function(){
 			score++;
 			//Create new food
 			create_food();
+			foodIndex++;
+			if(foodIndex == foodImages.length)
+				foodIndex = 0;
 			
 			clearInterval(game_loop);
 			game_loop = setInterval(paint, speed*((score+10)/(score+11)));
@@ -199,7 +231,8 @@ $(document).ready(function(){
 		}
 		
 		//Lets paint the food
-		paint_food(food.x, food.y);
+		paint_food(food.x, food.y, foodIndex);
+		
 		//Lets paint the score
 		var score_text = "Score: " + score;
 		ctx.fillStyle = 'blue';
@@ -222,13 +255,13 @@ $(document).ready(function(){
 	{
 		i=i%snakeImages.length;
 		ctx.drawImage(snakeImages[i], x*cell_size, y*cell_size, cell_size, cell_size);
-		ctx.strokeStyle = "white";
+		ctx.strokeStyle = "black";
 		ctx.strokeRect(x*cell_size, y*cell_size, cell_size, cell_size);
 	}
 
-	function paint_food(x, y)
+	function paint_food(x, y, i)
 	{
-		ctx.drawImage(food_image, x*cell_size, y*cell_size, cell_size, cell_size);
+		ctx.drawImage(foodImages[i], x*cell_size, y*cell_size, cell_size, cell_size);
 		ctx.strokeStyle = "white";
 		ctx.strokeRect(x*cell_size, y*cell_size, cell_size, cell_size);
 	}
