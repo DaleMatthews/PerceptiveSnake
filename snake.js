@@ -10,7 +10,7 @@ $(document).ready(function(){
 	
 	var ctx; //back buffer
 	
-	var cell_size = 20;
+	var cell_size = 30;
 	var dir;
 	var food;
 	var score;
@@ -18,6 +18,8 @@ $(document).ready(function(){
 	
 	var snake_image;
 	var food_image;
+	
+ 	var snakeArray = new Array(); 
 	
 	//var burp = new Audio('burp.mp3');
 	//var death = new Audio('torture.mp3');
@@ -45,15 +47,49 @@ $(document).ready(function(){
 		//every 60m
 		if(typeof game_loop != "undefined") 
 			clearInterval(game_loop);
-		game_loop = setInterval(paint, 80);
+		game_loop = setInterval(paint, 70);
 	}
 
 	function loadImages()
 	{
 		food_image = new Image();
 		food_image.src = 'cupcake.jpg';
-		snake_image = new Image();
-		snake_image.src = 'snake.jpg';
+
+		snakeArray[0] = new Image();
+		snakeArray[0].src = 'image/snake.jpg';
+
+		snakeArray[1] = new Image();
+		snakeArray[1].src = 'image/snake2.jpg';
+
+		snakeArray[2] = new Image();
+		snakeArray[2].src = 'image/snake3.jpg';
+
+		snakeArray[3] = new Image();
+		snakeArray[3].src = 'image/snake4.jpg';
+
+		snakeArray[4] = new Image();
+		snakeArray[4].src = 'image/snake5.jpg';
+
+		snakeArray[5] = new Image();
+		snakeArray[5].src = 'image/snake6.jpg';
+		
+		snakeArray[6] = new Image();
+		snakeArray[6].src = 'image/snake7.jpg';
+
+		snakeArray[7] = new Image();
+		snakeArray[7].src = 'image/snake8.jpg';
+
+		snakeArray[8] = new Image();
+		snakeArray[8].src = 'image/snake9.jpg';
+
+		snakeArray[9] = new Image();
+		snakeArray[9].src = 'image/snake10.jpg';
+
+		snakeArray[10] = new Image();
+		snakeArray[10].src = 'image/snake11.jpg';
+
+		snakeArray[11] = new Image();
+		snakeArray[11].src = 'image/snake12.jpg';
 	}
 	
 	function create_snake()
@@ -113,6 +149,8 @@ $(document).ready(function(){
 		{
 			//ends game
 			//death.play();
+			score=0;
+			create_snake();
 			return false;
 		}
 		
@@ -140,7 +178,7 @@ $(document).ready(function(){
 		{
 			var c = snake_array[i];
 			//Lets paint 10px wide cells
-			paint_snake(c.x, c.y);
+			paint_snake(c.x, c.y, i);
 		}
 		
 		//Lets paint the food
@@ -156,9 +194,10 @@ $(document).ready(function(){
 	}
 	
 	//Lets first create a generic function to paint cells
-	function paint_snake(x, y)
+	function paint_snake(x, y, i)
 	{
-		ctx.drawImage(snake_image, x*cell_size, y*cell_size, cell_size, cell_size);
+		i=i%snakeArray.length;
+		ctx.drawImage(snakeArray[i], x*cell_size, y*cell_size, cell_size, cell_size);
 		ctx.strokeStyle = "white";
 		ctx.strokeRect(x*cell_size, y*cell_size, cell_size, cell_size);
 	}
