@@ -31,7 +31,7 @@ $(document).ready(function(){
 	});
 	var mainSong = new Howl({
 	    urls: ['sounds/mainSong.mp3', 'sounds/mainSong.ogg']
-	});//.play();
+	}).play();
 
 	var snake_array; //an array of cells to make up the snake
 	
@@ -211,8 +211,8 @@ $(document).ready(function(){
 				foodIndex = 0;
 			
 			clearInterval(game_loop);
-			game_loop = setInterval(paint, speed*((score+10)/(score+11)));
 			speed=speed*((score+10)/(score+11));
+			game_loop = setInterval(paint, speed);
 		}
 		else
 		{
