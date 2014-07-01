@@ -14,12 +14,11 @@ $(document).ready(function(){
 	var dir;
 	var food;
 	var score;
-	var start=true;
 	var gameOn=true;
 	
 	var food_image;
 	
- 	var snakeArray = new Array(); 
+ 	var snakeImages = new Array(); 
 	
 	var burp = new Howl({
 	    urls: ['sounds/burp.mp3', 'sounds/burp.ogg']
@@ -28,7 +27,6 @@ $(document).ready(function(){
 	    urls: ['sounds/torture.mp3', 'sounds/torture.ogg']
 	});
 
-	//Lets create the snake now
 	var snake_array; //an array of cells to make up the snake
 	
 	function init()
@@ -53,41 +51,41 @@ $(document).ready(function(){
 		food_image = new Image();
 		food_image.src = 'cupcake.jpg';
 
-		snakeArray[0] = new Image();
-		snakeArray[0].src = 'image/snake.jpg';
+		snakeImages[0] = new Image();
+		snakeImages[0].src = 'image/snake.jpg';
 
-		snakeArray[1] = new Image();
-		snakeArray[1].src = 'image/snake2.jpg';
+		snakeImages[1] = new Image();
+		snakeImages[1].src = 'image/snake2.jpg';
 
-		snakeArray[2] = new Image();
-		snakeArray[2].src = 'image/snake3.jpg';
+		snakeImages[2] = new Image();
+		snakeImages[2].src = 'image/snake3.jpg';
 
-		snakeArray[3] = new Image();
-		snakeArray[3].src = 'image/snake4.jpg';
+		snakeImages[3] = new Image();
+		snakeImages[3].src = 'image/snake4.jpg';
 
-		snakeArray[4] = new Image();
-		snakeArray[4].src = 'image/snake5.jpg';
+		snakeImages[4] = new Image();
+		snakeImages[4].src = 'image/snake5.jpg';
 
-		snakeArray[5] = new Image();
-		snakeArray[5].src = 'image/snake6.jpg';
+		snakeImages[5] = new Image();
+		snakeImages[5].src = 'image/snake6.jpg';
 		
-		snakeArray[6] = new Image();
-		snakeArray[6].src = 'image/snake7.jpg';
+		snakeImages[6] = new Image();
+		snakeImages[6].src = 'image/snake7.jpg';
 
-		snakeArray[7] = new Image();
-		snakeArray[7].src = 'image/snake8.jpg';
+		snakeImages[7] = new Image();
+		snakeImages[7].src = 'image/snake8.jpg';
 
-		snakeArray[8] = new Image();
-		snakeArray[8].src = 'image/snake9.jpg';
+		snakeImages[8] = new Image();
+		snakeImages[8].src = 'image/snake9.jpg';
 
-		snakeArray[9] = new Image();
-		snakeArray[9].src = 'image/snake10.jpg';
+		snakeImages[9] = new Image();
+		snakeImages[9].src = 'image/snake10.jpg';
 
-		snakeArray[10] = new Image();
-		snakeArray[10].src = 'image/snake11.jpg';
+		snakeImages[10] = new Image();
+		snakeImages[10].src = 'image/snake11.jpg';
 
-		snakeArray[11] = new Image();
-		snakeArray[11].src = 'image/snake12.jpg';
+		snakeImages[11] = new Image();
+		snakeImages[11].src = 'image/snake12.jpg';
 	}
 	
 	function create_snake()
@@ -116,6 +114,8 @@ $(document).ready(function(){
 	//Lets paint the snake now
 	function paint()
 	{
+		if(!gameOn)
+			return;
 		//get the context
 		ctx = offscreenCanvas.getContext('2d');
 		
@@ -147,6 +147,7 @@ $(document).ready(function(){
 		{
 			//ends game
 			//death.play();
+			gameOn=false;
 			score=0;
 			create_snake();
 			return false;
@@ -186,7 +187,7 @@ $(document).ready(function(){
 		ctx.fillStyle = 'blue';
 		ctx.fillText(score_text, 5, height-5);
 		
-		//now paint it in the front
+		//now draw it in the front buffer
 		ctx = mainCanvas.getContext('2d');
 		ctx.drawImage(offscreenCanvas, 0, 0);
 	}
@@ -194,8 +195,8 @@ $(document).ready(function(){
 	//Lets first create a generic function to paint cells
 	function paint_snake(x, y, i)
 	{
-		i=i%snakeArray.length;
-		ctx.drawImage(snakeArray[i], x*cell_size, y*cell_size, cell_size, cell_size);
+		i=i%snakeImages.length;
+		ctx.drawImage(snakeImages[i], x*cell_size, y*cell_size, cell_size, cell_size);
 		ctx.strokeStyle = "white";
 		ctx.strokeRect(x*cell_size, y*cell_size, cell_size, cell_size);
 	}
@@ -230,7 +231,7 @@ $(document).ready(function(){
 		else if(key == "39" && dir != "left") dir = "right";
 		else if(key == "40" && dir != "up") dir = "down";
 		else if (key == '32'){
-			 start=" ";
+			 gameOn=true;
 			 init();
 	    }
 		//The snake is now keyboard controllable
