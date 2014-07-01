@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 	var snake_array; //an array of cells to make up the snake
 	
-	var speed=200;
+	var speed=180;
 
 	function init()
 	{
@@ -162,7 +162,7 @@ $(document).ready(function(){
 				highScore=score;
 			}
 			score=0;
-			//speed=300;
+			speed=180;
 			create_snake();
 			return false;
 		}
@@ -179,7 +179,8 @@ $(document).ready(function(){
 			create_food();
 			
 			clearInterval(game_loop);
-			game_loop = setInterval(paint, speed*(4/(score+4)));
+			game_loop = setInterval(paint, speed*((score+10)/(score+11)));
+			speed=speed*((score+10)/(score+11));
 		}
 		else
 		{
@@ -203,11 +204,10 @@ $(document).ready(function(){
 		var score_text = "Score: " + score;
 		ctx.fillStyle = 'blue';
 		ctx.fillText(score_text, 5, height-5);
-		
-		
-			if (score>highScore){
-				highScore=score;
-			}
+				
+		if (score>highScore){
+			highScore=score;
+		}
 		highScoreText = "High Score: " + highScore;
 		ctx.fillStyle = 'blue';
 		ctx.fillText(highScoreText, width-80, height-5);
