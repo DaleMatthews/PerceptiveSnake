@@ -28,7 +28,7 @@ $(document).ready(function(){
 	});
 	var death = new Howl({
 	    urls: ['sounds/torture.mp3', 'sounds/torture.ogg']
-	}).play();
+	});
 
 	//Lets create the snake now
 	var snake_array; //an array of cells to make up the snake
@@ -145,7 +145,7 @@ $(document).ready(function(){
 		//This will restart the game if the snake hits the wall
 		//Lets add the code for body collision
 		//Now if the head of the snake bumps into its body, the game will restart
-		if(nx == -1 || nx == width/cell_size || ny == -1 || ny == height/cell_size || check_collision(nx, ny, snake_array))
+		if(nx < 0 || nx >= width/cell_size || ny < 0 || ny >= height/cell_size || check_collision(nx, ny, snake_array))
 		{
 			//ends game
 			//death.play();
