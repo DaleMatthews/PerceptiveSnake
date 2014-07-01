@@ -19,6 +19,7 @@ $(document).ready(function(){
 	var highScore=0;
 	var highScoreText;
 	
+
 	var food_image;
 	
  	var snakeImages = new Array(); 
@@ -35,6 +36,8 @@ $(document).ready(function(){
 
 	var snake_array; //an array of cells to make up the snake
 	
+	var speed=200;
+
 	function init()
 	{
 		loadImages();
@@ -45,11 +48,12 @@ $(document).ready(function(){
 		//finally lets display  the score
 		score = 0;
 	
+
 		//Lets move the snake now using a timer which will trigger the paint function
 		//every 60m
 		if(typeof game_loop != "undefined") 
 			clearInterval(game_loop);
-		game_loop = setInterval(paint, 120);
+		game_loop = setInterval(paint, speed);
 	}
 
 	function loadImages()
@@ -158,6 +162,7 @@ $(document).ready(function(){
 				highScore=score;
 			}
 			score=0;
+			//speed=300;
 			create_snake();
 			return false;
 		}
@@ -172,6 +177,9 @@ $(document).ready(function(){
 			score++;
 			//Create new food
 			create_food();
+			
+			clearInterval(game_loop);
+			game_loop = setInterval(paint, speed*(4/(score+4)));
 		}
 		else
 		{
