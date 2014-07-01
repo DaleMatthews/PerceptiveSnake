@@ -15,6 +15,9 @@ $(document).ready(function(){
 	var food;
 	var score;
 	var gameOn=true;
+
+	var highScore=0;
+	var highScoreText;
 	
 	var food_image;
 	
@@ -151,6 +154,9 @@ $(document).ready(function(){
 			//ends game
 			death.play();
 			gameOn=false;
+			if (score>highScore){
+				highScore=score;
+			}
 			score=0;
 			create_snake();
 			return false;
@@ -190,6 +196,14 @@ $(document).ready(function(){
 		ctx.fillStyle = 'blue';
 		ctx.fillText(score_text, 5, height-5);
 		
+		
+			if (score>highScore){
+				highScore=score;
+			}
+		highScoreText = "High Score: " + highScore;
+		ctx.fillStyle = 'blue';
+		ctx.fillText(highScoreText, width-80, height-5);
+
 		//now draw it in the front buffer
 		ctx = mainCanvas.getContext('2d');
 		ctx.drawImage(offscreenCanvas, 0, 0);
