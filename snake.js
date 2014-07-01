@@ -26,6 +26,9 @@ $(document).ready(function(){
 	var death = new Howl({
 	    urls: ['sounds/torture.mp3', 'sounds/torture.ogg']
 	});
+	var mainSong = new Howl({
+	    urls: ['sounds/mainSong.mp3', 'sounds/mainSong.ogg']
+	}).play();
 
 	var snake_array; //an array of cells to make up the snake
 	
@@ -43,7 +46,7 @@ $(document).ready(function(){
 		//every 60m
 		if(typeof game_loop != "undefined") 
 			clearInterval(game_loop);
-		game_loop = setInterval(paint, 70);
+		game_loop = setInterval(paint, 120);
 	}
 
 	function loadImages()
@@ -146,7 +149,7 @@ $(document).ready(function(){
 		if(nx < 0 || nx >= width/cell_size || ny < 0 || ny >= height/cell_size || check_collision(nx, ny, snake_array))
 		{
 			//ends game
-			//death.play();
+			death.play();
 			gameOn=false;
 			score=0;
 			create_snake();
